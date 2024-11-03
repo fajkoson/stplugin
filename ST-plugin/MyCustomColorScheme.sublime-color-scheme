@@ -1,0 +1,62 @@
+{
+    "variables": {
+        "background": "#000000", 	// pitch black
+        "foreground": "#4Baabb",        // text like CXX_STANDARD
+        "comment": "#4B5B5B",  		// dark green
+        "keyword": "#8B5E3C",  		// brown-red
+        "string": "#ce9178",
+        "number": "#b5cea8",
+        "function": "#dcdcaa",  	// Function names
+        "cmake-command": "#A0522D",  	// cmake-specific commands
+        "python-keyword": "#9cdcfe",  	// python-specific keywords
+	"highlight": "#1e1e1e", 	// medium gray
+	"selection_border": "#444444"	// medium gray
+    },
+    "globals": {
+        "background": "var(background)",
+        "foreground": "var(foreground)",
+        "caret": "var(foreground)"
+    },
+    "rules": [
+        // Plain text fallback
+        {
+            "scope": "text",
+            "foreground": "var(foreground)"
+        },
+        // Comments
+        {
+            "scope": "comment",
+            "foreground": "var(comment)"
+        },
+        // Universal keywords like if, else, for
+        {
+            "scope": "keyword.control",
+            "foreground": "var(keyword)"
+        },
+        // Strings
+        {
+            "scope": "string",
+            "foreground": "var(string)"
+        },
+        // Numbers
+        {
+            "scope": "constant.numeric",
+            "foreground": "var(number)"
+        },
+        // Function names
+        {
+            "scope": "entity.name.function",
+            "foreground": "var(function)"
+        },
+        // CMake-specific commands like add_executable
+        {
+            "scope": "keyword.control.cmake",
+            "foreground": "var(cmake-command)"
+        },
+        // Python-specific keywords
+        {
+            "scope": "keyword.control.python",
+            "foreground": "var(python-keyword)"
+        }
+    ]
+}

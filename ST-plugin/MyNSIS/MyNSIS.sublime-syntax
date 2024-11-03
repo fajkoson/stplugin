@@ -1,0 +1,39 @@
+%YAML 1.2
+---
+name: MyNSIS
+file_extensions:
+  - nsi
+  - nsh
+first_line_match: ^.*Section.*$
+scope: source.nsis
+
+contexts:
+  main:
+    # NSIS commands (split for readability)
+    - match: \b(Section|SectionEnd|Function|FunctionEnd|Return|Call|Goto|StrCpy|File|Exec|ExecWait)\b
+      scope: keyword.control.nsis
+
+    - match: \b(MessageBox|IfFileExists|IntCmp|IntCmpU|StrCmp|StrCmpS|WriteRegStr|ReadRegStr|DeleteRegValue|DeleteRegKey|Delete)\b
+      scope: keyword.control.nsis
+
+    - match: \b(CopyFiles|CreateShortCut|CreateDirectory|ReserveFile|SetOutPath|OutFile|SetCompressor|SetCompress|SetOverwrite)\b
+      scope: keyword.control.nsis
+
+    - match: \b(WriteUninstaller|Uninstall|UninstallSection|Page|PageEx|UninstPage|InstType|FileOpen|FileClose|FileRead|FileWrite|FileSeek|FileGetSize)\b
+      scope: keyword.control.nsis
+
+    # Variables (e.g., $INSTDIR, $OUTDIR)
+    - match: \$[a-zA-Z_][a-zA-Z0-9_]*
+      scope: variable.other.nsis
+
+    # String literals (double-quoted)
+    - match: '"[^"]*"'
+      scope: string.quoted.double.nsis
+
+    # Comments (start with ; or #)
+    - match: '[;#].*$'
+      scope: comment.line.semicolon.nsis
+
+    # Numbers
+    - match: \b\d+\b
+      scope: constant.numeric.nsis

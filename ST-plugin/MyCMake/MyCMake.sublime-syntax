@@ -1,0 +1,62 @@
+%YAML 1.2
+---
+name: MyCMake
+file_extensions:
+  - CMakeLists.txt
+  - cmake
+first_line_match: ^.*cmake_minimum_required\(VERSION.*$
+scope: source.cmake
+
+contexts:
+  main:
+    # CMake commands (split for readability)
+    - match: \b(block|break|cmake_host_system_information|cmake_language|cmake_minimum_required|cmake_parse_arguments|cmake_path|cmake_pkg_config|cmake_policy|configure_file)\b
+      scope: keyword.control.cmake
+
+    - match: \b(continue|else|elseif|endblock|endforeach|endfunction|endif|endmacro|endwhile|execute_process)\b
+      scope: keyword.control.cmake
+
+    - match: \b(file|find_file|find_library|find_package|find_path|find_program|foreach|function|get_cmake_property|get_directory_property)\b
+      scope: keyword.control.cmake
+
+    - match: \b(get_filename_component|get_property|if|include|include_guard|list|macro|mark_as_advanced|math|message)\b
+      scope: keyword.control.cmake
+
+    - match: \b(option|return|separate_arguments|set|set_directory_properties|set_property|site_name|string|unset|variable_watch)\b
+      scope: keyword.control.cmake
+
+    - match: \b(while|add_compile_definitions|add_compile_options|add_custom_command|add_custom_target|add_definitions|add_dependencies|add_executable|add_library|add_link_options)\b
+      scope: keyword.control.cmake
+
+    - match: \b(add_subdirectory|add_test|aux_source_directory|build_command|cmake_file_api|create_test_sourcelist|define_property|enable_language|enable_testing|export)\b
+      scope: keyword.control.cmake
+
+    - match: \b(fltk_wrap_ui|get_source_file_property|get_target_property|get_test_property|include_directories|include_external_msproject|include_regular_expression|install|link_directories|link_libraries)\b
+      scope: keyword.control.cmake
+
+    - match: \b(load_cache|project|remove_definitions|set_source_files_properties|set_target_properties|set_tests_properties|source_group|target_compile_definitions|target_compile_features|target_compile_options)\b
+      scope: keyword.control.cmake
+
+    - match: \b(target_include_directories|target_link_directories|target_link_libraries|target_link_options|target_precompile_headers|target_sources|try_compile|try_run|ctest_build|ctest_configure)\b
+      scope: keyword.control.cmake
+
+    - match: \b(ctest_coverage|ctest_empty_binary_directory|ctest_memcheck|ctest_read_custom_files|ctest_run_script|ctest_sleep|ctest_start|ctest_submit|ctest_test|ctest_update|ctest_upload)\b
+      scope: keyword.control.cmake
+
+    # Variables (e.g., ${CMAKE_SOURCE_DIR})
+    - match: \$\{[a-zA-Z_][a-zA-Z0-9_]*\}
+      scope: variable.other.cmake
+
+    # String literals (double-quoted)
+    - match: '"[^"]*"'
+      scope: string.quoted.double.cmake
+
+    # Comments (start with #)
+    - match: '#.*$'
+      scope: comment.line.number-sign.cmake
+
+    # Numbers
+    - match: \b\d+\b
+      scope: constant.numeric.cmake
+
+
